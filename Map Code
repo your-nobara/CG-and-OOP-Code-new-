@@ -1,0 +1,41 @@
+*******************************************************************************************************************
+This is the correct and running code for the map
+don't use the program from the OOP(final) file that code does not provide correct output this is the correct one
+*******************************************************************************************************************
+#include <iostream>
+#include <map> 
+#include <string> 
+#include <algorithm> // For transform()
+
+using namespace std;
+
+int main() {
+    map<string, int> statePopulation = {
+        {"California", 39538223},
+        {"Texas", 29145505},
+        {"Florida", 21538187},
+        {"New York", 20201249},
+        {"Pennsylvania", 13002700}
+    };
+
+    string stateName;
+    cout << "Enter the name of the state to search for its population: ";
+    getline(cin, stateName); // Read the full state name, even if it has spaces
+
+    // Convert input to lowercase for case-insensitive search
+    transform(stateName.begin(), stateName.end(), stateName.begin(), ::tolower);
+    
+    for (const auto& pair : statePopulation) {
+        string keyLower = pair.first;
+        transform(keyLower.begin(), keyLower.end(), keyLower.begin(), ::tolower);
+        
+        if (keyLower == stateName) {
+            cout << "The population of " << pair.first << " is " << pair.second << "." << endl;
+            return 0; // Exit the program after finding the state
+        }
+    }
+
+    cout << "State not found in the map." << endl;
+
+    return 0;
+}
